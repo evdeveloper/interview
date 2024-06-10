@@ -1,0 +1,60 @@
+<script setup lang="ts">
+import { ref } from "vue";
+
+
+interface IMenuItem {
+  label: string
+  icon: string
+  path: string
+  name: string
+}
+
+const items = ref<IMenuItem[]>([
+  {
+    label: 'Авторизация',
+    icon: 'pi pi-user',
+    name: 'auth',
+    path: '/auth'
+  },
+  {
+    label: 'Добавить',
+    icon: 'pi pi-plus',
+    name: 'add',
+    path: '/'
+  },
+  {
+    label: 'Список собеседований',
+    icon: 'pi pi-list',
+    name: 'list',
+    path: '/list'
+  },
+  {
+    label: 'Статистика',
+    icon: 'pi pi-chart-pie',
+    name: 'statistic',
+    path: '/statistic'
+  }
+]);
+</script>
+
+<template>
+  <app-menubar :model="items" class="menu">
+    <template #item={item,props}>
+      <router-link :to="item.path" class="flex align-items-center" v-bind="props.action">
+        <span :class="item.icon" class="p-menuitem-icon"></span>
+        <span class="ml-2">{{item.label}}</span>
+      </router-link>
+    </template>
+  </app-menubar>
+</template>
+
+<style scoped>
+  .menu {
+    padding: 30px 0;
+  }
+
+  .menu-exit {
+    cursor: pointer;
+  }
+
+</style>
